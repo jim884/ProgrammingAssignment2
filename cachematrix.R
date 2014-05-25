@@ -2,8 +2,7 @@
 ## functions do
 
 
-## Make an cacheable matrix, with operation to access it
-
+## Make an cacheable matrix, with operations to access it
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
         set <- function(y) {
@@ -18,11 +17,7 @@ makeCacheMatrix <- function(x = matrix()) {
              getinverse = getinverse)
 }
 
-
-
-
 ## Does the solve function over the cached matrix, if the result was cached, no new computation is done
-
 cacheSolve <- function(x, ...) {
         m <- x$getinverse()
         if(!is.null(m)) {
