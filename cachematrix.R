@@ -2,17 +2,35 @@
 ## functions do
 
 
-## Write a short comment describing this function
+## Make an cacheable matrix, with operation to access it
 
 makeCacheMatrix <- function(x = matrix()) {
-##test
+        m <- NULL
+        set <- function(y) {
+                x <<- y
+                m <<- NULL
+        }
+        get <- function() x
+        setinverse <- function(inverse) m <<- inverse
+        getinverse <- function() m
+        list(set = set, get = get,
+             setinverse = setinverse,
+             getinverse = getinverse)
 }
 
 
 
 
-## Write a short comment describing this function
+## Does the solve function over the cached matrix, if the result was cached, no new computation is done
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+        m <- x$getinverse()
+        if(!is.null(m)) {
+                message("getting cached data")
+                return(m)
+        }
+        data <- x$get()
+        m <- solve(data, ...)
+        x$setinverse(m)
+        m
 }
